@@ -1,0 +1,48 @@
+﻿SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [tax].[Position] (
+  [TaxYear] [smallint] NOT NULL,
+  [AccountID] [int] NOT NULL,
+  [_ID] [int] NOT NULL,
+  [InOperID] [int] NULL,
+  [OutOperID] [int] NULL,
+  [TaxCode] [char](6) NOT NULL,
+  [ObjectID] [int] NOT NULL,
+  [MatchQTY] [numeric](19, 8) NOT NULL,
+  [PosStatus] AS (case when [InOperID] IS NULL then CONVERT([char](1),'S',(0)) else case when [OutOperID] IS NULL then CONVERT([char](1),'L',(0)) else CONVERT([char](1),'C',(0)) end end) PERSISTED,
+  [InOperTypeID] [tinyint] NULL,
+  [OutOperTypeID] [tinyint] NULL,
+  [InSTDate] [date] NULL,
+  [OutSTDate] [date] NULL,
+  [BuyDate] [date] NULL,
+  [SellDate] [date] NULL,
+  [InGroupID] [int] NULL,
+  [OutGroupID] [int] NULL,
+  [InPrice] [numeric](19, 8) NULL,
+  [OutPrice] [numeric](19, 8) NULL,
+  [InSumRUR] [numeric](19, 8) NULL,
+  [InMinRUR] [numeric](19, 8) NULL,
+  [InMaxRUR] [numeric](19, 8) NULL,
+  [InNKDRUR] [numeric](19, 8) NULL,
+  [OutSumRUR] [numeric](19, 8) NULL,
+  [OutMinRUR] [numeric](19, 8) NULL,
+  [OutNKDRUR] [numeric](19, 8) NULL,
+  [PROZ_MV] [numeric](19, 8) NULL,
+  [MVPOZ] [numeric](19, 8) NULL,
+  [KA] [numeric](19, 8) NULL,
+  [Basket] [smallint] NULL,
+  [R] [numeric](19, 8) NULL,
+  [RA] [numeric](19, 8) NULL,
+  [VP] [numeric](19, 8) NULL,
+  [PROFIT] [numeric](19, 8) NULL,
+  [UB] [numeric](19, 8) NULL,
+  [RUVP] [numeric](19, 8) NULL,
+  [InTrdRef] [varchar](1024) NULL,
+  [IdObjectGroup] [int] NULL,
+  [INCOURSE] [numeric](19, 8) NULL,
+  [OUTCOURSE] [numeric](19, 8) NULL,
+  CONSTRAINT [PK_Position] PRIMARY KEY CLUSTERED ([TaxYear], [AccountID], [_ID])
+)
+ON [PRIMARY]
+GO
